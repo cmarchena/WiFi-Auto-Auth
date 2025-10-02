@@ -7,6 +7,48 @@ Ideal for schools, workplaces, or any location with recurring Wi-Fi logins, this
 
 ### **For step-by-step setup instructions, please refer to [setup.md](https://github.com/01bps/WiFi-Auto-Auth/blob/main/setup.md)**
 
+## **Logging Options**
+
+The script includes a professional logging system with configurable verbosity levels and multiple output handlers:
+
+### **Command Line Usage**
+
+```bash
+# Basic usage with default logging (INFO level)
+python wifi_auto_login.py
+
+# Debug mode with detailed diagnostic information
+python wifi_auto_login.py --log-level DEBUG
+
+# View recent login attempts only (no login attempt)
+python wifi_auto_login.py --view-logs 10
+
+# Custom log directory with file-only logging
+python wifi_auto_login.py --log-dir ./custom_logs --no-console-logging --log-level INFO
+```
+
+### **Available Log Levels**
+- `DEBUG`: Detailed diagnostic information for troubleshooting
+- `INFO`: General application flow and login attempt details (default)
+- `WARNING`: Warning messages for potential issues
+- `ERROR`: Error conditions and failures
+- `CRITICAL`: Critical errors that prevent operation
+
+### **Environment Variables**
+You can also configure logging using environment variables:
+```bash
+# Set log level and directory
+LOG_LEVEL=DEBUG LOG_DIR=./prod_logs python wifi_auto_login.py
+
+# Disable console logging for production
+NO_CONSOLE_LOGGING=true python wifi_auto_login.py
+```
+
+### **Log Rotation**
+- Automatic log rotation when files reach 10MB (configurable via `LOG_MAX_BYTES`)
+- Keeps 5 backup files by default (configurable via `LOG_BACKUP_COUNT`)
+- Separate formats for console (human-readable) and file (detailed debugging)
+
 ## **Security Notes**
 - Credentials are securely stored in an SQLite database within your home directory.
 - No sensitive data is transmitted except during the login request.
